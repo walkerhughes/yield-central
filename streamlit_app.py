@@ -3,7 +3,6 @@ import datetime
 import pandas as pd
 import altair as alt
 from utils import date_filter_format
-# import yfinance as yf
 
 min_date = datetime.date(1990, 1, 2)
 today = datetime.date.today()
@@ -14,7 +13,8 @@ df = pd.read_parquet("./data/data_cleaned/yield_curve_historical_rates_MASTER.pa
 
 ########################## Introduction ##########################
 
-st.write(':wave: Welcome to YieldCentral!\n\n')
+url = "https://github.com/walkerhughes/yieldcentral/tree/main"
+st.write(':wave: Welcome to YieldCentral! Start exploring below or check out the [GitHub](%s)' % url)
 
 st.write('The US Treasury yield curve plots the interest rates of US Government bonds of different tenures over time. Studying the yield curve can give \
          insights into the time-value of money and the level of perceived risk in the economy. The Federal Researve Bank affects the interest rates seen \
@@ -23,6 +23,7 @@ st.write('The US Treasury yield curve plots the interest rates of US Government 
          mostly felt in the yields tenured 3 months or less. Longer term yields are affected by another important factor called the \'term premium\'. \
          Directly measuring an interest rate\'s term premium can be tricky, but analyzing the yield curve and the spreads between yields of different tenures \
          can help elucidate how the aggregate economy views the riskiness of debt.\n\n')
+
 st.write(':chart_with_upwards_trend: Pick a date to start plotting historical US Treasury interest rates below!')
 
 ########################## Plotting On Date ##########################
@@ -80,9 +81,7 @@ end_date_cleaned = date_filter_format(end_date)
 
 time_series = df[(df["Date"] >= start_date_cleaned) & (df["Date"] <= end_date_cleaned)].copy()
 
-# months 
-
-# st.write("Individual rates from ", start_date, " to ", end_date)
+# plotting months
 
 mo_1 = alt.Chart(time_series).mark_line().encode(
     x='Date',
@@ -104,7 +103,7 @@ mo_6 = alt.Chart(time_series).mark_line().encode(
     y=alt.Y('6 Mo', sort=time_series.Date.values),
 )
 
-# years 
+# plotting years 
 
 year_1 = alt.Chart(time_series).mark_line().encode(
     x='Date',
@@ -212,5 +211,3 @@ with tab2:
     st.altair_chart(two_thirty, use_container_width=True)
 with tab3:
     st.altair_chart(ten_thirty, use_container_width=True)
-
-########################## Plotting SPY ##########################
