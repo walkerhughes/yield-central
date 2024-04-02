@@ -4,8 +4,11 @@ Welcome to YieldCentral, a daily-updated hub for U.S. Treasury Yield Curve data.
 
 ## Features
 Daily Updates: Fresh data pulled directly from treasury.gov at the end of each day, ensuring you have the latest information.
+
 Automated Workflow: CI/CD pipeline efficiently automates the process from data scraping to dataset updates.
+
 Comprehensive Dataset: Accumulate a rich dataset of yield curve rates back to 1990 and updated daily.
+
 Interactive Dashboard: Explore the data through an interactive Streamlit app, featuring dynamic charts and customizable views of yield trends.
 
 ## Explore YieldCentral
