@@ -14,7 +14,7 @@ df = pd.read_parquet("./data/data_cleaned/yield_curve_historical_rates_MASTER.pa
 
 ########################## Introduction ##########################
 
-st.write('Welcome to YieldCentral!\n\n')
+st.write(':wave: Welcome to YieldCentral!\n\n')
 
 st.write('The US Treasury yield curve plots the interest rates of US Government bonds of different tenures over time. Studying the yield curve can give \
          insights into the time-value of money and the level of perceived risk in the economy. The Federal Researve Bank affects the interest rates seen \
@@ -23,12 +23,12 @@ st.write('The US Treasury yield curve plots the interest rates of US Government 
          mostly felt in the yields tenured 3 months or less. Longer term yields are affected by another important factor called the \'term premium\'. \
          Directly measuring an interest rate\'s term premium can be tricky, but analyzing the yield curve and the spreads between yields of different tenures \
          can help elucidate how the aggregate economy views the riskiness of debt.\n\n')
-st.write('Pick a date to start plotting historical US Treasury interest rates below!')
+st.write(':chart_with_upwards_trend: Pick a date to start plotting historical US Treasury interest rates below!')
 
 ########################## Plotting On Date ##########################
 
 plot_date = st.date_input(
-  label = "Yield Curve Date", 
+  label = ":spiral_calendar_pad: Yield Curve Date", 
   min_value = min_date, 
   max_value = today, 
   value = today - datetime.timedelta(days = 2),
@@ -41,7 +41,7 @@ df_filtered = df[df["Date"] == plot_date_cleaned].copy()
 
 df_filtered = df_filtered.drop(columns=["2 Yr - 10 Yr", "2 Yr - 30 Yr", "10 Yr - 30 Yr"])
 
-st.write("Here's the Yield Curve on ", plot_date)
+# st.write("Here's the Yield Curve on ", plot_date)
 
 st.dataframe(df_filtered, use_container_width = True, hide_index = True)
 
@@ -57,10 +57,10 @@ st.altair_chart(chart, use_container_width = True)
 
 ########################## Plotting Over Time ##########################
 
-st.write("Pick a date range to plot interest rates over time.")
+st.write("Pick a date range to plot interest rates and common interest rate spreads over time.")
 
 start_date = st.date_input(
-  label = "Start Date", 
+  label = ":spiral_calendar_pad: Start Date", 
   min_value = min_date, 
   max_value = today,
   value = today - datetime.timedelta(days = 18*31),
@@ -68,7 +68,7 @@ start_date = st.date_input(
 )
 
 end_date = st.date_input(
-  label = "End Date", 
+  label = ":spiral_calendar_pad: End Date", 
   min_value = min_date, 
   max_value = today, 
   value = today - datetime.timedelta(days = 3),
@@ -82,7 +82,7 @@ time_series = df[(df["Date"] >= start_date_cleaned) & (df["Date"] <= end_date_cl
 
 # months 
 
-st.write("Individual rates from ", start_date, " to ", end_date)
+# st.write("Individual rates from ", start_date, " to ", end_date)
 
 mo_1 = alt.Chart(time_series).mark_line().encode(
     x='Date',
@@ -180,7 +180,10 @@ with tab11:
 
 ########################## Plotting Yield Spreads ##########################
 
-st.write("Common yield spreads From ", start_date, " to ", end_date)
+st.write("Visualizing the differences between interest rates can also be informative. It's not uncommon to hear folks talk about the \'inverting yield curve\' \
+         when there is fear of an economic downturn. This generally refers to a short term interest rate like the 3 Month or 2 Year rate being higher than \
+         a longer term rate, like the 10 Year rate. \n\n")
+st.write(":chart_with_upwards_trend: Check out some common yield curve spreads for the date range selected above!")
 
 two_ten = alt.Chart(time_series).mark_line().encode(
     x='Date',
