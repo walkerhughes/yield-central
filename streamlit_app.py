@@ -183,7 +183,7 @@ with tab11:
 st.write("Visualizing the differences between interest rates can also be informative. It's not uncommon to hear folks talk about the \'inverting yield curve\' \
          when there is fear of an economic downturn. This generally refers to a short term interest rate like the 3 Month or 2 Year rate being higher than \
          a longer term rate, like the 10 Year rate. \n\n")
-st.write(":chart_with_upwards_trend: Check out some common yield curve spreads for the date range selected above!")
+st.write(":chart_with_upwards_trend: Check out some common yield curve spreads for the date range selected above")
 
 two_ten = alt.Chart(time_series).mark_line().encode(
     x='Date',
