@@ -8,7 +8,7 @@ min_date = datetime.date(1990, 1, 2)
 today = datetime.date.today()
 
 st.set_page_config(
-    page_title = "Yield Curve Central", 
+    page_title = "Welcome to Yield Curve Central", 
     page_icon=":chart_with_upwards_trend:", 
     layout = "wide"
 )
@@ -24,7 +24,7 @@ st.write('#### :wave: Welcome to Yield Curve Central!\n')
 st.write('##### Start exploring below or check out the [GitHub](%s)' % url)
 
 st.write('The US Treasury yield curve plots the interest rates of US Government bonds of different tenures over time. Studying the yield curve can give \
-         insights into the time-value of money and the level of perceived risk in the economy. The Federal Researve Bank affects the interest rates seen \
+         insights into the time-value of money and the level of perceived risk in the economy. The Federal Reserve Bank affects the interest rates seen \
          here through their Federal Funds Rate, which is set every 3 months at their FOMC meetings. This overnight interest rate sets the tone for longer dated \
          interest in the economy. Since the Fed meets in 3-month intervals to determine short-term rates, their effect on the yield curve is \
          mostly felt in the yields tenured 3 months or less. Longer term yields are affected by another important factor called the \'term premium\'. \
