@@ -14,7 +14,8 @@ df = pd.read_parquet("./data/data_cleaned/yield_curve_historical_rates_MASTER.pa
 ########################## Introduction ##########################
 
 url = "https://github.com/walkerhughes/yieldcentral/tree/main"
-st.write(':wave: Welcome to YieldCentral! Start exploring below or check out the [GitHub](%s)' % url)
+st.write('#### :wave: Welcome to YieldCentral!\n')
+st.write('##### Start exploring below or check out the [GitHub](%s)' % url)
 
 st.write('The US Treasury yield curve plots the interest rates of US Government bonds of different tenures over time. Studying the yield curve can give \
          insights into the time-value of money and the level of perceived risk in the economy. The Federal Researve Bank affects the interest rates seen \
@@ -24,12 +25,12 @@ st.write('The US Treasury yield curve plots the interest rates of US Government 
          Directly measuring an interest rate\'s term premium can be tricky, but analyzing the yield curve and the spreads between yields of different tenures \
          can help elucidate how the aggregate economy views the riskiness of debt.\n\n')
 
-st.write(':chart_with_upwards_trend: Pick a date to start plotting historical US Treasury interest rates below!')
+st.write('##### :chart_with_upwards_trend: Pick a date to start plotting historical interest rates below')
 
 ########################## Plotting On Date ##########################
 
 plot_date = st.date_input(
-  label = ":spiral_calendar_pad: Yield Curve Date", 
+  label = ':spiral_calendar_pad: Date', 
   min_value = min_date, 
   max_value = today, 
   value = today - datetime.timedelta(days = 2),
@@ -58,7 +59,7 @@ st.altair_chart(chart, use_container_width = True)
 
 ########################## Plotting Over Time ##########################
 
-st.write("Pick a date range to plot interest rates and common interest rate spreads over time.")
+st.write("##### :point_down: Pick a range to plot interest rates and common spreads over time")
 
 start_date = st.date_input(
   label = ":spiral_calendar_pad: Start Date", 
