@@ -8,11 +8,22 @@ from utils import date_filter_format
 min_date = datetime.date(1990, 1, 2)
 today = datetime.date.today()
 
-st.write('Welcome to YieldCentral! Pick a date to start plotting historical US Treasury interest rates below.')
-
 ########################## Read in Data ##########################
 
 df = pd.read_parquet("./data/data_cleaned/yield_curve_historical_rates_MASTER.parquet")
+
+########################## Introduction ##########################
+
+st.write('Welcome to YieldCentral!\n\n')
+
+st.write('The US Treasury yield curve plots the interest rates of US Government bonds of different tenures over time. Studying the yield curve can give \
+         insights into the time-value of money and the level of perceived risk in the economy. The Federal Researve Bank affects the interest rates seen \
+         here through their Federal Funds Rate, which is set every 3 months at their FOMC meetings. This overnight interest rate sets the tone for longer dated \
+         interest in the economy. Since the Fed meets in 3-month intervals to determine short-term rates, their effect on the yield curve is \
+         mostly felt in the yields tenured 3 months or less. Longer term yields are affected by another important factor called the \'term premium\'. \
+         Directly measuring an interest rate\'s term premium can be tricky, but analyzing the yield curve and the spreads between yields of different tenures \
+         can help elucidate how the aggregate economy views the riskiness of debt.\n\n')
+st.write('Pick a date to start plotting historical US Treasury interest rates below!')
 
 ########################## Plotting On Date ##########################
 
@@ -20,7 +31,8 @@ plot_date = st.date_input(
   label = "Yield Curve Date", 
   min_value = min_date, 
   max_value = today, 
-  value = today - datetime.timedelta(days = 2) 
+  value = today - datetime.timedelta(days = 2),
+  format = "MM-DD-YYYY"
 )
 
 plot_date_cleaned = date_filter_format(plot_date)
@@ -51,14 +63,16 @@ start_date = st.date_input(
   label = "Start Date", 
   min_value = min_date, 
   max_value = today,
-  value = today - datetime.timedelta(days = 18*31)
+  value = today - datetime.timedelta(days = 18*31),
+  format = "MM-DD-YYYY"
 )
 
 end_date = st.date_input(
   label = "End Date", 
   min_value = min_date, 
   max_value = today, 
-  value = today - datetime.timedelta(days = 3)
+  value = today - datetime.timedelta(days = 3),
+  format = "MM-DD-YYYY"
 )
 
 start_date_cleaned = date_filter_format(start_date) 
