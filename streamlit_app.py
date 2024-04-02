@@ -7,6 +7,12 @@ from utils import date_filter_format
 min_date = datetime.date(1990, 1, 2)
 today = datetime.date.today()
 
+st.set_page_config(
+    page_title = "Yield Curve Central", 
+    page_icon=":chart_with_upwards_trend:", 
+    layout = "wide"
+)
+
 ########################## Read in Data ##########################
 
 df = pd.read_parquet("./data/data_cleaned/yield_curve_historical_rates_MASTER.parquet")
@@ -14,7 +20,7 @@ df = pd.read_parquet("./data/data_cleaned/yield_curve_historical_rates_MASTER.pa
 ########################## Introduction ##########################
 
 url = "https://github.com/walkerhughes/yieldcentral/tree/main"
-st.write('#### :wave: Welcome to YieldCentral!\n')
+st.write('#### :wave: Welcome to Yield Curve Central!\n')
 st.write('##### Start exploring below or check out the [GitHub](%s)' % url)
 
 st.write('The US Treasury yield curve plots the interest rates of US Government bonds of different tenures over time. Studying the yield curve can give \
@@ -34,7 +40,7 @@ plot_date = st.date_input(
   min_value = min_date, 
   max_value = today, 
   value = today - datetime.timedelta(days = 2),
-  format = "MM-DD-YYYY"
+  format = "MM-DD-YYYY",
 )
 
 plot_date_cleaned = date_filter_format(plot_date)
