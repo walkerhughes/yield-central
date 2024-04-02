@@ -1,0 +1,43 @@
+name: Daily get_yc_data Script Execution
+
+on:
+  schedule:
+    # Runs every day at 10pm 
+    - cron: '0 22 * * *'
+
+jobs:
+  run-scrapy-script:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.8' 
+
+    - name: Install dependencies
+      run: |
+        python3 -m pip install --upgrade pip
+        python3 -m pip install --upgrade requests
+        python3 -m pip install --upgrade bs4 
+
+    - name: Upload Data Directory
+      uses: actions/upload-artifact@v3
+      with:
+        name: data
+        path: ./data/data_scraped
+
+    - name: Run get_yc_data.py script
+      run: |
+        python3 ./get_yc_data.py
+
+    - name: Commit and push if there are changes
+      run: |
+        git config --global user.email "actions@github.com"
+        git config --global user.name "GitHub Actions"
+        git add -A 
+        git commit -m "Update data" || echo "No changes to commit"
+        git push
