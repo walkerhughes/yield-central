@@ -15,7 +15,7 @@ st.set_page_config(
 
 ########################## Read in Data ##########################
 
-df = pd.read_parquet("./data/data_cleaned/yield_curve_historical_rates_MASTER.parquet")
+df = pd.read_parquet("./data/data_cleaned/yield_curve_historical_rates_MASTER_2.parquet")
 
 ########################## Introduction ##########################
 
@@ -40,10 +40,10 @@ plot_date = st.date_input(
   min_value = min_date, 
   max_value = today, 
   value = today - datetime.timedelta(days = 2),
-  format = "MM-DD-YYYY",
+  format = "YYYY-MM-DD",
 )
 
-plot_date_cleaned = date_filter_format(plot_date)
+plot_date_cleaned = plot_date.strftime('%Y-%m-%d') #date_filter_format(plot_date)
 
 df_filtered = df[df["Date"] == plot_date_cleaned].copy() 
 
