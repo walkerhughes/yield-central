@@ -6,7 +6,7 @@ import os
 
 class Scraper: 
     def __init__(self): 
-        self.today = datetime.today().date().strftime('%Y-%m-%d')
+        self.today = datetime.today().date()
         self.get_current_month() 
         self.format_payload_url() 
 
@@ -63,7 +63,7 @@ class Scraper:
         save_dir = "./data/data_scraped"
         if not os.path.exists(save_dir): 
             os.mkdir(save_dir)
-        with open(f"{save_dir}/{self.today}.json", "w") as newfile:
+        with open(f"{save_dir}/{self.today.strftime('%Y-%m-%d')}.json", "w") as newfile:
             json.dump(self.data, newfile)
 
 
