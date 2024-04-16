@@ -30,7 +30,7 @@ class Scraper:
         parsed_data = [_.text.strip() for _ in yc_values_on_date.__dict__["contents"][1::2]]
         self.date_cleaned = self.clean_scraped_date(parsed_data[0])
         yc_data_json = {
-            "Date": self.today,
+            "Date": self.today.strftime('%Y-%m-%d'),
             "1 Mo": float(parsed_data[10]),
             "2 Mo": float(parsed_data[11]),
             "3 Mo": float(parsed_data[12]),
