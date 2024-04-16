@@ -30,9 +30,9 @@ jobs:
         name: data
         path: ./data/data_scraped
 
-    - name: Run get_yc_data.py script
+    - name: Run test.py script
       run: |
-        python3 ./get_yc_data.py
+        python3 ./test.py
 
     - name: Commit and push if there are changes
       run: |
