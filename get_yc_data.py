@@ -81,6 +81,6 @@ class Scraper:
 if __name__ == "__main__": 
 
     scraper = Scraper() 
-    scraper.get_yc_data(verbose = False) 
+    scraper.get_yc_data() 
     scraper.save_to_json()
-    scraper.merge_with_parquet(override = False)
+    scraper.merge_with_parquet()
