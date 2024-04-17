@@ -1,4 +1,4 @@
-import json
+bose = Falseimport json
 import requests
 from datetime import datetime
 from bs4 import BeautifulSoup
@@ -81,6 +81,6 @@ class Scraper:
 if __name__ == "__main__": 
 
     scraper = Scraper() 
-    scraper.get_yc_data() 
+    scraper.get_yc_data(verbose = False) 
     scraper.save_to_json()
-    scraper.merge_with_parquet()
+    scraper.merge_with_parquet(override_data = False)
