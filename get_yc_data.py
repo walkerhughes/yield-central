@@ -1,4 +1,4 @@
-bose = Falseimport json
+import json
 import requests
 from datetime import datetime
 from bs4 import BeautifulSoup
