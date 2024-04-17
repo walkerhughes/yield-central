@@ -3,7 +3,7 @@ name: Daily get_yc_data Script Execution
 on:
   schedule:
     # Runs every day at 10pm 
-    - cron: '0 22 * * *'
+    - cron: '0 23 * * *'
 
 jobs:
   run-scrapy-script:
@@ -30,9 +30,9 @@ jobs:
         name: data
         path: ./data/data_scraped
 
-    - name: Run test.py script
+    - name: Run get_yc_data.py script
       run: |
-        python3 ./test.py
+        python3 ./get_yc_data.py
 
     - name: Commit and push if there are changes
       run: |
