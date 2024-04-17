@@ -15,7 +15,7 @@ st.set_page_config(
 
 ########################## Read in Data ##########################
 
-df = pd.read_parquet("./data/data_cleaned/yield_curve_historical_rates_MASTER_2.parquet")
+df = pd.read_parquet("./data/data_cleaned/yield_curve_historical_rates_MASTER.parquet")
 
 ########################## Introduction ##########################
 
@@ -39,7 +39,7 @@ plot_date = st.date_input(
   label = ':spiral_calendar_pad: Date', 
   min_value = min_date, 
   max_value = today, 
-  value = today - datetime.timedelta(days = 2),
+  value = today - datetime.timedelta(days = 1),
   format = "YYYY-MM-DD",
 )
 
@@ -72,19 +72,19 @@ start_date = st.date_input(
   min_value = min_date, 
   max_value = today,
   value = today - datetime.timedelta(days = 18*31),
-  format = "MM-DD-YYYY"
+  format = "YYYY-MM-DD"
 )
 
 end_date = st.date_input(
   label = ":spiral_calendar_pad: End Date", 
   min_value = min_date, 
   max_value = today, 
-  value = today - datetime.timedelta(days = 3),
-  format = "MM-DD-YYYY"
+  value = today - datetime.timedelta(days = 1),
+  format = "YYYY-MM-DD"
 )
 
-start_date_cleaned = date_filter_format(start_date) 
-end_date_cleaned = date_filter_format(end_date) 
+start_date_cleaned = start_date.strftime('%Y-%m-%d')
+end_date_cleaned = end_date.strftime('%Y-%m-%d')
 
 time_series = df[(df["Date"] >= start_date_cleaned) & (df["Date"] <= end_date_cleaned)].copy()
 
