@@ -2,7 +2,7 @@ import streamlit as st
 import datetime 
 import pandas as pd
 import altair as alt
-from utils import date_filter_format
+from scripts.utils import date_filter_format
 
 min_date = datetime.date(1990, 1, 2)
 today = datetime.date.today()

@@ -3,7 +3,7 @@ name: Daily get_yc_data Script Execution
 on:
   schedule:
     # Runs every day at 10pm 
-    - cron: '0 22 * * *'
+    - cron: '0 23 * * *'
 
 jobs:
   run-scrapy-script:
@@ -31,11 +31,11 @@ jobs:
       uses: actions/upload-artifact@v3
       with:
         name: data
-        path: ./data/data_scraped
+        path: ./data/scraped
 
     - name: Run get_yc_data.py script
       run: |
-        python3 ./get_yc_data.py
+        python3 ./scripts/get_yc_data.py
 
     - name: Commit and push if there are changes
       run: |
