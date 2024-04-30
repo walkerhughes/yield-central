@@ -15,7 +15,7 @@ st.set_page_config(
 
 ########################## Read in Data ##########################
 
-df = pd.read_parquet("./data/data_cleaned/yield_curve_historical_rates_MASTER.parquet")
+df = pd.read_parquet("./data/cleaned/yield_curve_historical_rates_MASTER.parquet")
 ########################## Introduction ##########################
 
 url = "https://github.com/walkerhughes/yieldcentral/tree/main"
