@@ -11,7 +11,7 @@ class Scraper:
         self.today_str = self.today.strftime('%Y-%m-%d')
         self.get_current_month() 
         self.format_payload_url() 
-        self.data_cleaned_dir = "./data/data_cleaned/yield_curve_historical_rates_MASTER.parquet"
+        self.data_cleaned_dir = "./data/cleaned/yield_curve_historical_rates_MASTER.parquet"
 
     def get_current_month(self):
         year, month = self.today.year, self.today.month
@@ -63,7 +63,7 @@ class Scraper:
             raise ValueError(f"Attempt failed. Either 'Month' argument invalid or data cannot be parsed as implemented.")
 
     def save_to_json(self):
-        save_dir = "./data/data_scraped"
+        save_dir = "./data/scraped"
         if not os.path.exists(save_dir): 
             os.mkdir(save_dir)
         with open(f"{save_dir}/{self.today_str}.json", "w") as newfile:
