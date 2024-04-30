@@ -1,4 +1,5 @@
 .idea
 ./scripts/test.ipynb
-./model
+./model/dev.ipynb
+.DS_Store
 venv
