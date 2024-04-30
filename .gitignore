@@ -1,5 +1,3 @@
-.idea
+venv
 scripts/test.ipynb
 model/dev.ipynb
-.DS_Store
-venv
