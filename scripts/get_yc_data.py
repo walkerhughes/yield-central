@@ -109,6 +109,8 @@ if __name__ == "__main__":
     scraper.get_yc_data() 
     scraper.save_to_json()
     scraper.merge_with_parquet()
+
+    # try pushing scraped data to big query
     try: 
         scraper.push_to_big_query() 
     except: 

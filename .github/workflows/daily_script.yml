@@ -26,7 +26,7 @@ jobs:
         python3 -m pip install --upgrade pyarrow
         python3 -m pip install --upgrade fastparquet
         python3 -m pip install --upgrade pandas
-        python3 -m pip install --upgrade google-cloud-bigquery
+        python3 -m pip install --U google-cloud-bigquery
 
     - name: Upload Data Directory
       uses: actions/upload-artifact@v3
