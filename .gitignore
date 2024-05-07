@@ -1,3 +1,6 @@
 venv
 scripts/test.ipynb
 model/dev.ipynb
+bigquery.ipynb
+yieldcurve-422317-510529e47525.json
+**/.DS_Store
