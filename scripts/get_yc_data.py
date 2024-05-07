@@ -5,6 +5,9 @@ from bs4 import BeautifulSoup
 import pandas as pd 
 import os
 
+from google.cloud import bigquery 
+
+
 class Scraper: 
     def __init__(self): 
         self.today = datetime.today().date()
@@ -77,6 +80,28 @@ class Scraper:
         else: 
             print(f"Final pd.DataFrame object already contains data for {self.today_str}. If you want to override the existing data, set override_data to True.")
 
+    
+    def push_to_big_query(self):
+        # init client 
+        client = bigquery.Client()
+
+        # Define your dataset and table
+        dataset_id = 'yieldcurve'
+        table_id = 'historical'
+        table_ref = client.dataset(dataset_id).table(table_id)
+
+        # Insert data into the table
+        to_insert = [
+            self.data
+        ]
+
+        errors = client.insert_rows_json(table_ref, to_insert)  # Make an API request.
+        if errors == []:
+            print("New rows have been added.")
+        else:
+            print("Encountered errors while inserting rows: {}".format(errors))
+
+
 
 if __name__ == "__main__": 
 
@@ -84,3 +109,7 @@ if __name__ == "__main__":
     scraper.get_yc_data() 
     scraper.save_to_json()
     scraper.merge_with_parquet()
+    try: 
+        scraper.push_to_big_query() 
+    except: 
+        ValueError("Error in Google Credentials or no data to push.")
