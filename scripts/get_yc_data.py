@@ -90,9 +90,31 @@ class Scraper:
         table_id = 'historical'
         table_ref = client.dataset(dataset_id).table(table_id)
 
+        row_to_insert = {
+            "Date": "2024-05-03", 
+            "1_Mo": 5.51, 
+            "2_Mo": 5.48, 
+            "3_Mo": 5.45, 
+            "6_Mo": 5.41, 
+            "1_Yr": 5.12, 
+            "2_Yr": 4.81, 
+            "3_Yr": 4.63, 
+            "5_Yr": 4.48, 
+            "7_Yr": 4.49, 
+            "10_Yr": 4.5, 
+            "20_Yr": 4.75, 
+            "30_Yr": 4.66, 
+            "2_Yr___10_Yr": 0.3099999999999996, 
+            "2_Yr___30_Yr": 0.14999999999999947, 
+            "10_Yr___30_Yr": -0.16000000000000014
+        }
+
+        for key, key_to_insert in zip(self.data, row_to_insert): 
+            row_to_insert[key_to_insert] = self.data[key]
+
         # Insert data into the table
         to_insert = [
-            self.data
+            row_to_insert
         ]
 
         errors = client.insert_rows_json(table_ref, to_insert)  # Make an API request.
