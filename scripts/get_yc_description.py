@@ -24,12 +24,8 @@ PROMPT = f"""
     3. **Investment Strategies:** <GIVE A BRIEF COMMENT ON WHAT THE CURRENT YIELD CURVE MIGHT INDICATE FOR INVESTORS>
 """
 
-# Create a function to generate insights
 def generate_insight(data_summary: pd.DataFrame) -> str:
-
-    # openai_api_key = os.environ("OPENAI_API_KEY") 
-    # openai.api_key = openai_api_key
-
+    # get model response based on the most current data
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
         messages=[
