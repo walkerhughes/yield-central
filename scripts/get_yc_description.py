@@ -27,6 +27,10 @@ PROMPT = f"""
 
 # Create a function to generate insights
 def generate_insight(data_summary: pd.DataFrame) -> str:
+
+    openai_api_key = os.environ("OPENAI_API_KEY") 
+    openai.api_key = openai_api_key
+
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
         messages=[
