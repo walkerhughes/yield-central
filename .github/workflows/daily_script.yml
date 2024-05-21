@@ -3,7 +3,7 @@ name: Daily get_yc_data Script Execution
 on:
   schedule:
     # Runs every day at 10pm 
-    - cron: '*/5 * * * *'
+    - cron: '0 22 * * *'
 
 jobs:
   run-scrapy-script:
@@ -34,6 +34,14 @@ jobs:
       with:
         name: data
         path: ./data/scraped
+
+    - name: Run get_yc_data.py script
+      env:
+        BIGQUERY_CREDENTIALS: ${{ secrets.BIGQUERY_CREDENTIALS }}
+      run: |
+        echo "${BIGQUERY_CREDENTIALS}" > credentials.json
+        export GOOGLE_APPLICATION_CREDENTIALS=credentials.json
+        python3 ./scripts/get_yc_data.py
 
     - name: Run get_yc_description.py script
       env:
