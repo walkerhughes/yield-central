@@ -7,8 +7,7 @@ import openai
 from google.cloud import bigquery 
 
 
-BASE_DIR = "/".join(os.getcwd().split("/")[: -1])
-DATA_CLEANED_DIR = "/data/cleaned/yield_curve_historical_rates_MASTER.parquet"
+DATA_CLEANED_DIR = "./data/cleaned/yield_curve_historical_rates_MASTER.parquet"
 CURRENT_DATE = str(datetime.datetime.today()).split(" ")[0]
 
 PROMPT = f"""
@@ -68,7 +67,7 @@ def push_to_big_query(data):
 if __name__ == "__main__": 
 
     # Get insights for the DataFrame summary
-    df = pd.read_parquet(BASE_DIR + DATA_CLEANED_DIR)
+    df = pd.read_parquet(DATA_CLEANED_DIR)
     insights = generate_insight(data_summary=df.iloc[: 31])
     data = {"Date": CURRENT_DATE, "Description": insights}
     push_to_big_query(data)
