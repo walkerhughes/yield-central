@@ -7,3 +7,5 @@ yieldcurve-422317-510529e47525.json
 **/credentials.json
 credentials.json
 temp.yml
+.env
+DEPRECATED
