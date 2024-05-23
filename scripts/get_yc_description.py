@@ -27,7 +27,7 @@ PROMPT = f"""
 def generate_insight(data_summary: pd.DataFrame) -> str:
     # get model response based on the most current data
     response = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo",
+        model="gpt-4",
         messages=[
             {"role": "system", "content": "You are an economic expert on the US Treasury Yield Curve. \
                                            You provide intelligent, objective, non-speculative analyses of recent data.\
