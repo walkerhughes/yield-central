@@ -15,7 +15,6 @@ summary_str = utils.summary_data_str(DATA_CLEANED_DIR)
 spy_data = utils.get_historical_market_data() 
 
 OVERVIEW_PROMPT = f""" 
-
     Today is {CURRENT_DATE}. \
     Provide a brief 5 sentence commentary on the current dynamics of the US Treasuy Yield Curve based on your analysis of this summary data: {summary_str},\
     and this data from the last month of end-of-day yield curve values: {df.iloc[: 31].to_string(index = False)}. \
@@ -25,7 +24,6 @@ OVERVIEW_PROMPT = f"""
     enough such that a professional investor would find reading it worthwhile. You may also indicate other areas researchers may wish to study for more context on the macroeconomic environment.
 
     I gill give you $500 dollars if you can accomplish this. Be sure to utilize the active voice when referencing any data or statistics.
-
 """
 
 # Create a function to generate insights

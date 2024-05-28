@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "yieldcurve-422317",
+  "private_key_id": "510529e475254aa11c963f7e2b01c73a0c866815",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDOF1xbzvJzHUUM\nUH3KkBhULAypjtHjD5cmKDoeuiLj0wjkxdrayzimSA2+LodRvGcY+hjz11m5SWS2\n4nE5VSz35VZXVXxP59Q2veIHQkr6B0hlnyWUSNJH9DtDXxpV3DAeLY2l6x3Tp27C\ne5Spavq7XAvDjn7Xfohcb8lcDckjKXCcHxrc9Su8V5KGSGJF/DOGgo0GiA4adTm4\n5wnDrGMnOS2EDsuPqBZrrKPvmIDYKcP0Mdk2nUN0CX9npCqyeqQ1ZnHU76TXcDyu\nv68gShintxWmXEacL6rh28hlPRNcJDm5VuC7ib5h+QWMe/uIg1eOgQsPc5lwfUXQ\nFeHvz01xAgMBAAECggEABYyqjfC5x8xs+NLItbCnwsnPzK0LyN/KZfQrwDZVLtjr\n/C+5l0fcsJWR2bM7cbkij/eMnFPF2xIEIg62hSDnB2twP2uFaEo4jc5oWYQ5I7HD\nLRrzo131j1gwEBNcpfsYFSOunYBGZ81c3BdnrXXNiOGgXqr249Fq5nPpNqA5vS3e\nDJXdOOEBojvbmMmeHPaLba+hgxhzf+jMpeIInML0+q5tKRo1u5+uKqHmViUo8LCC\neDzoB4lKzm4t0rJNOgi8NSxQ8TATOyPU0ZFZiiI2AqNclKDsbByQAa01JbsgNL+c\nGOUieXL1tsIp82+bqQKA29yn+LeJs3CjegbOVnAwFQKBgQDmxh6ZslG/lqmLjquw\nkrHv0uUpY7jdC1aTaN+bOiCCtvFa0GKPyEAu13w6WB6HBNP3RhKcJjKZ0C1DPU7r\ntHO2rvLu5F76TQqNyKl3ILO9gXiOIyW9UL8Ylt5fmDW2/oVvJFRdYAcUZTlm6zih\n30+QVt8qbPqxIxgx+nKhsh+CowKBgQDknohBNglKKFhqWV+s1DiT1yWf0cHsfO3E\n5ktT06jPp2d6zZrb/ius3pQEqLcpTYLGgg4QFAuCO4NDnFhfCp/KZ2Yth7DRw4sl\nE/rm7J69PpcS7jd++vhJR/rro3jAlbMrzHfYe85zdvCChDesUOljja1y4gEZ2ZCZ\nZn8niPAE2wKBgE+PSglu4qQMixMj8qkDSfkGWh701EzQld5oL37SgVbPP1IxuWkc\nfpQnkhqDOrMNxQ3gyJWwzY0dqh0eS9ES+zmmAva9IMlmOhc7cMEzMwRIWImYMHCe\nH+OYT73hOdOG1/XDLpqqeoZbh3il63ZTCJkYegOkYqEjGjpQv6hjQl3FAoGBAMEh\nu/F6+LYRB0AwaEbUsUcThdFRngVuNF8WPaR/NijWPvDbKGuYeMT88wZMkQ7vT/7q\nd37VsDNAm09OkMkZbIvMdeEYtCNAkhesnVTfp+ovKejwHSnEUmN1z1+pJaVr0YS6\norPbQzj/zYY0s+N6Ju/XDCP1EQEJbsJoeBqp8DnpAoGBAIy0tYURvcEx5CICp4Ks\nFPoKbdZBFtfPcUuAt1coiGR52/6UzBJGtcjfihw2gfPEWxt5Uc6nxphsP6Ki6un4\nZY3XLFMQkQSkCkGrjbiT4CbxAtV8quhV/rkODMd2Nu4qk8uXE5TGCCvCyaE1bEY+\nwSWL9HpwrHj5x9ZQaNS/GXe0\n-----END PRIVATE KEY-----\n",
+  "client_email": "python@yieldcurve-422317.iam.gserviceaccount.com",
+  "client_id": "100814513266110791703",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/python%40yieldcurve-422317.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
