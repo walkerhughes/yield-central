@@ -27,6 +27,7 @@ jobs:
         python3 -m pip install --upgrade fastparquet
         python3 -m pip install --upgrade pandas
         python3 -m pip install --upgrade google-cloud-bigquery
+        python3 -m pip install pandas_market_calendars==4.4.0
         python3 -m pip install openai==0.28
 
     - name: Upload Data Directory
