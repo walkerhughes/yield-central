@@ -16,7 +16,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.8' 
+        python-version: '3.11' 
 
     - name: Install dependencies
       run: |
@@ -28,6 +28,7 @@ jobs:
         python3 -m pip install --upgrade pandas
         python3 -m pip install --upgrade google-cloud-bigquery
         python3 -m pip install --upgrade pandas-market-calendars
+        python3 -m pip install --upgrade yfinance
         python3 -m pip install openai==0.28
 
     - name: Upload Data Directory
