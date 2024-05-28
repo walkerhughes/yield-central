@@ -1,9 +1,12 @@
+.gitignore
 venv
 scripts/test.ipynb
+scripts/yieldcurve-422317-510529e47525.json 
 model/dev.ipynb
 bigquery.ipynb
 yieldcurve-422317-510529e47525.json
 **/.DS_Store
+**/__pycache__
 **/credentials.json
 credentials.json
 temp.yml
