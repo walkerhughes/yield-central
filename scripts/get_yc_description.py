@@ -57,9 +57,9 @@ if __name__ == "__main__":
     if utils.is_trading_day(): 
         temp = generate_insight()
         tldr = generate_tldr(temp)
-        insights = f"\n**TL;DR**\n\n{tldr}\n\n**Market Overview**\n\n{temp}"
+        insights = f"\n**TL;DR**\n\n{tldr}\n\n**Digging Deeper**\n\n{temp}"
     else: 
-        insights = f"\n**Market Overview on {CURRENT_DATE}**\n\nMarkets are closed today. Please check back for updated insights soon."
+        insights = f"\nMarkets are closed today. Please check back for updated insights soon."
 
     data = {
         "Date": CURRENT_DATE, 
