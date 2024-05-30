@@ -8,8 +8,4 @@ bigquery.ipynb
 **/.DS_Store
 data/clean.ipynb 
 **/credentials.json
-<<<<<<< Updated upstream
-credentials.json
-=======
-credentials.json
->>>>>>> Stashed changes
+credentials.json 
