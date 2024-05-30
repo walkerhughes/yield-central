@@ -1,11 +1,6 @@
 venv
 .env
-**/DEPRECATED
-**/TESTING
-bigquery.ipynb
-**/yieldcurve-422317-510529e47525.json 
 **/__pycache__
 **/.DS_Store
-data/clean.ipynb 
 **/credentials.json
 credentials.json 
