@@ -79,7 +79,6 @@ class Scraper:
             df_merged.to_parquet(self.data_cleaned_dir, index = False)
         else: 
             print(f"Final pd.DataFrame object already contains data for {self.today_str}. If you want to override the existing data, set override_data to True.")
-
     
     def push_to_big_query(self):
         # init client 
@@ -91,22 +90,22 @@ class Scraper:
         table_ref = client.dataset(dataset_id).table(table_id)
 
         row_to_insert = {
-            "Date": "2024-05-03", 
-            "1_Mo": 5.51, 
-            "2_Mo": 5.48, 
-            "3_Mo": 5.45, 
-            "6_Mo": 5.41, 
-            "1_Yr": 5.12, 
-            "2_Yr": 4.81, 
-            "3_Yr": 4.63, 
-            "5_Yr": 4.48, 
-            "7_Yr": 4.49, 
-            "10_Yr": 4.5, 
-            "20_Yr": 4.75, 
-            "30_Yr": 4.66, 
-            "2_Yr___10_Yr": 0.3099999999999996, 
-            "2_Yr___30_Yr": 0.14999999999999947, 
-            "10_Yr___30_Yr": -0.16000000000000014
+            "Date": None, 
+            "1_Mo": None, 
+            "2_Mo": None, 
+            "3_Mo": None, 
+            "6_Mo": None, 
+            "1_Yr": None, 
+            "2_Yr": None, 
+            "3_Yr": None, 
+            "5_Yr": None, 
+            "7_Yr": None, 
+            "10_Yr":None, 
+            "20_Yr": None, 
+            "30_Yr": None, 
+            "2_Yr___10_Yr": None, 
+            "2_Yr___30_Yr": None, 
+            "10_Yr___30_Yr": None, 
         }
 
         for key, key_to_insert in zip(self.data, row_to_insert): 
@@ -117,19 +116,17 @@ class Scraper:
             row_to_insert
         ]
 
-        errors = client.insert_rows_json(table_ref, to_insert)  # Make an API request.
+        errors = client.insert_rows_json(table_ref, to_insert) 
         if errors == []:
             print("New rows have been added.")
         else:
             print("Encountered errors while inserting rows: {}".format(errors))
 
 
-
 if __name__ == "__main__": 
 
     scraper = Scraper() 
     scraper.get_yc_data() 
-    scraper.save_to_json()
     scraper.merge_with_parquet()
 
     # try pushing scraped data to big query
