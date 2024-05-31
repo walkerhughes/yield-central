@@ -4,3 +4,4 @@ venv
 **/.DS_Store
 **/credentials.json
 credentials.json 
+previous_prompts
