@@ -112,25 +112,21 @@ class Scraper:
             row_to_insert[key_to_insert] = self.data[key]
 
         # Insert data into the table
-        to_insert = [
-            row_to_insert
-        ]
-
+        to_insert = [row_to_insert]
         errors = client.insert_rows_json(table_ref, to_insert) 
         if errors == []:
             print("New rows have been added.")
         else:
             print("Encountered errors while inserting rows: {}".format(errors))
 
-
-if __name__ == "__main__": 
-
-    scraper = Scraper() 
-    scraper.get_yc_data() 
-    scraper.merge_with_parquet()
-
-    # try pushing scraped data to big query
+def main(): 
     try: 
+        scraper = Scraper() 
+        scraper.get_yc_data() 
+        scraper.merge_with_parquet()
         scraper.push_to_big_query() 
     except: 
-        ValueError("Error in Google Credentials or no data to push.")
+        print("Error in Google Credentials or no data to push.")
+
+if __name__ == "__main__": 
+    main() 
