@@ -9,6 +9,9 @@ import pandas_market_calendars as mcal
 import yfinance as yf 
 import openai 
 
+import heapq
+import requests
+from datetime import datetime 
 
 def clean_date(datetime_date): 
     # returns cleaned datetime date as str 
@@ -131,13 +134,60 @@ def generate_tldr(insights) -> str:
     return response['choices'][0]['message']['content'].strip()
 
 
+def get_alphavantage_articles() -> dict: 
+    url = f'https://www.alphavantage.co/query?function=NEWS_SENTIMENT&topics=economy_monetary&apikey=Z1O8XN3WKHVEXJAK'
+    response = requests.get(url)
+    response_json = response.json()
+    return response_json
+
+def get_relevance_score(item: dict) -> float:
+    if 'topics' in item and isinstance(item['topics'], list):
+        for topic in item['topics']:
+            if topic['topic'] == 'Economy - Monetary':
+                return float(topic['relevance_score'])
+    return 0.0
+
+def get_top_k_relevant_articles(data: dict, k: int) -> list: 
+    top_k_articles = heapq.nlargest(k, data["feed"], key = get_relevance_score)
+    return top_k_articles
+
+def format_markdown_citation(article):
+    # Extract the date
+    date_str = article['time_published']
+    date_obj = datetime.strptime(date_str, '%Y%m%dT%H%M%S')
+    formatted_date = date_obj.strftime('%Y, %B %d')
+
+    # Extract other details
+    authors = ', '.join(article['authors'])
+    title = article['title']
+    source = article['source']
+    url = article['url']
+    
+    # Format the citation with the title as a hyperlink
+    citation = f"{authors}. ({formatted_date}). {title}. {source}. [(Read here)]({url})"
+    return citation
+
+def get_top_k_summaries(top_k_articles): 
+    return "\n\n".join([f"Title: {article['title']}\nSummary: {article['summary']}" for article in top_k_articles])
+
+def get_top_k_citations(top_k_articles): 
+    return "**Sources + Relevant Articles**\n\n" + "\n\n".join([format_markdown_citation(article) for article in top_k_articles])
+
 def get_prompt(date: str, summary_data: str, historical_yc: str, historical_spy: str) -> str: 
+
+    data = get_alphavantage_articles()
+    top_k_articles = get_top_k_relevant_articles(data, 3) 
+    article_summaries = get_top_k_summaries(top_k_articles)
+    citations = get_top_k_citations(top_k_articles)
+
     return f""" 
         Today is {date}. 
 
         Write a 5-sentence analysis of the most recent US Treasury Yield Curve dynamics. Be sure to use the active voice. 
         
         Write your analysis in the context of today's yield curve summary data: {summary_data}, and the last month of end-of-day yield curve values: {historical_yc}. To aid your analysis is the last month of SPY ETF data: {historical_spy}. 
+
+        Utilize the following article summaries in your analysis, but beware of any specific alarming predictions made: {article_summaries}. 
 
         Write your analysis in the context of the most recent Federal Reserve FOMC Statements: 
          
@@ -147,4 +197,4 @@ def get_prompt(date: str, summary_data: str, historical_yc: str, historical_spy:
 
         Your analysis should be intelligent, non-speculative, and not contain financial advice. It should be easily understood by an 8th grader, but compelling enough that a professional investor would find it worthwhile. Finish with a brief forward-looking statement on what the Federal Reserve might comment on in their next FOMC meeting given the current macro environment.
 
-    """
+    """, citations
