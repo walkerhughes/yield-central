@@ -14,7 +14,7 @@ yc_data = pd.read_parquet(DATA_CLEANED_DIR)
 summary_str = utils.summary_data_str(DATA_CLEANED_DIR)
 spy_data = utils.get_historical_market_data() 
 
-OVERVIEW_PROMPT = utils.get_prompt(
+overview_prompt, citations = utils.get_prompt(
     date=CURRENT_DATE, 
     summary_data=summary_str, 
     historical_yc=yc_data.iloc[: 31].to_string(index = False), 
@@ -24,9 +24,9 @@ OVERVIEW_PROMPT = utils.get_prompt(
 if __name__ == "__main__": 
 
     if utils.is_trading_day(): 
-        temp = utils.generate_insight(OVERVIEW_PROMPT)
+        temp = utils.generate_insight(overview_prompt)
         tldr = utils.generate_tldr(temp)
-        insights = f"\n**TL;DR**\n\n{tldr}\n\n**Digging Deeper**\n\n{temp}"
+        insights = f"\n**TL;DR**\n\n{tldr}\n\n**Digging Deeper**\n\n{temp}\n\n{citations}"
     else: 
         insights = f"\nMarkets are closed today. Please check back for updated insights soon."
 
