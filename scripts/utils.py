@@ -181,20 +181,33 @@ def get_prompt(date: str, summary_data: str, historical_yc: str, historical_spy:
     citations = get_top_k_citations(top_k_articles)
 
     return f""" 
+
         Today is {date}. 
 
-        Write a 5-sentence analysis of the most recent US Treasury Yield Curve dynamics. Be sure to use the active voice. 
+        Write a brief analysis of the most recent US Treasury Yield Curve dynamics. The goal is to: 1, inform the reader about what is happening in markets and 2, interpret what these developments may mean for future monetary policy set by the Federal Reserve.
         
         Write your analysis in the context of today's yield curve summary data: {summary_data}, and the last month of end-of-day yield curve values: {historical_yc}. To aid your analysis is the last month of SPY ETF data: {historical_spy}. 
 
-        Utilize the following article summaries in your analysis, but beware of any specific alarming predictions made: {article_summaries}. 
+        Utilize the following article summaries in your analysis, but avoid any specific alarming predictions made: {article_summaries}. 
 
-        Write your analysis in the context of the most recent Federal Reserve FOMC Statements: 
+        Write your analysis in the context of the two most recent Federal Reserve FOMC Statements: 
          
             March 30, 2024: 'Recent indicators suggest solid economic growth, with strong job gains and low unemployment. Although inflation has eased over the past year, it remains high. The Committee aims for maximum employment and 2% inflation over the long term and notes improving balance in achieving these goals, though the economic outlook remains uncertain. To support these goals, the Committee has decided to maintain the federal funds rate at 5.25% to 5.5%. They will assess incoming data and the evolving outlook before making any adjustments, emphasizing that they will not lower the rate until inflation is sustainably moving toward 2%. They will also continue to reduce their holdings of Treasury and agency securities. The Committee is committed to returning inflation to 2% and will monitor incoming information to adjust policy as needed. Their assessments will consider various factors, including labor market conditions, inflation pressures, expectations, and financial and international developments.'
 
             May 2, 2024: 'Recent indicators show solid economic growth with strong job gains and low unemployment. Inflation has eased but remains high, with no recent progress toward the 2% target. The Committee aims for maximum employment and 2% inflation long-term, noting improved balance in achieving these goals despite economic uncertainty. It remains focused on inflation risks. To support its objectives, the Committee keeps the federal funds rate at 5.25-5.5% and will adjust based on incoming data and risk balance. No rate reduction is expected until inflation moves sustainably toward 2%. The Committee will reduce its Treasury securities holdings more slowly, from $60 billion to $25 billion monthly, while maintaining a $35 billion cap on agency securities. The Committee is committed to returning inflation to 2% and will adjust monetary policy as needed, considering labor market, inflation, and global financial developments.'
 
-        Your analysis should be intelligent, non-speculative, and not contain financial advice. It should be easily understood by an 8th grader, but compelling enough that a professional investor would find it worthwhile. Finish with a brief forward-looking statement on what the Federal Reserve might comment on in their next FOMC meeting given the current macro environment.
+        Use this chain-of-thought to develop your analysis: 
+
+            1. Ask yourself what the Federal Reserve's overarching goals are in setting future monetary policy, specifically regarding inlfation and interest rates.
+
+            2. Ask yourself how the yield curve summary data, end-of-day values, and SPY data fit affect how the Federal Reserve will respond. 
+
+            3. Ask yourself if the article summaries provide any additional uneful information in your analysis of this goal. 
+
+            4. With these questions answered, write your analysis. 
+            
+        Your analysis should be intelligent, non-speculative, and not contain financial advice. It should be easily understood by an 8th grader, but compelling enough that a professional investor would find it worthwhile. 
+                
+        Be sure to use the active voice. 
 
     """, citations
