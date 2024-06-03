@@ -122,7 +122,7 @@ def generate_insight(OVERVIEW_PROMPT: str = "") -> str:
 
 def generate_tldr(insights) -> str:
     response = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo-instruct",
+        model="gpt-4o",
         messages=[
             {"role": "system", "content": "You are an expert at writing TL;DR versions of long text while maintaining the most vital information."},
             {"role": "user", "content": f"Concisely summarize the following text, returning only your summary: {insights}"}
