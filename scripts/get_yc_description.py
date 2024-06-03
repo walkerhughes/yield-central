@@ -1,7 +1,7 @@
 import pandas as pd 
 from datetime import datetime
 
-import scripts.utils.get_daily_discription as get_daily_discription 
+import utils.get_daily_discription as get_daily_discription 
 
 CURRENT_DATE = get_daily_discription.clean_date(datetime.today())
 DATA_CLEANED_DIR = "./data/cleaned/yield_curve_historical_rates_MASTER.parquet"
