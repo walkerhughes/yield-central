@@ -30,7 +30,7 @@ def format_markdown_citation(article: dict) -> str:
     url = article['url']
     
     # Format the citation with the title as a hyperlink
-    citation = f"{authors}. ({formatted_date}). {title}. {source}. [(Read here)]({url})"
+    citation = f"{authors}. ({formatted_date}). {title}. {source}. [Read here.]({url})"
     return citation
 
 def get_top_k_relevant_articles(data: dict, k: int) -> list: 
