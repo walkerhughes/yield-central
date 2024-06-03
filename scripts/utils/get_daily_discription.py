@@ -9,8 +9,6 @@ import pandas_market_calendars as mcal
 import yfinance as yf 
 import openai 
 
-import get_news_articles
-
 
 def clean_date(datetime_date): 
     # returns cleaned datetime date as str 
@@ -133,12 +131,7 @@ def generate_tldr(insights) -> str:
     return response['choices'][0]['message']['content'].strip()
 
 
-def get_prompt(date: str, summary_data: str, historical_yc: str, historical_spy: str) -> str: 
-
-    data = get_news_articles.get_alphavantage_articles()
-    top_k_articles = get_news_articles.get_top_k_relevant_articles(data, 3) 
-    article_summaries = get_news_articles.get_top_k_summaries(top_k_articles)
-    citations = get_news_articles.get_top_k_citations(top_k_articles)
+def get_prompt(date: str, summary_data: str, historical_yc: str, historical_spy: str, article_summaries: str) -> str: 
 
     return f""" 
 
@@ -172,4 +165,4 @@ def get_prompt(date: str, summary_data: str, historical_yc: str, historical_spy:
 
         Ensure your analysis is intelligent, non-speculative, and free of financial advice. It should be easily understood by an 8th grader but compelling for a professional investor. Use the active voice. 
 
-    """, citations
+    """
