@@ -1,4 +1,4 @@
-from scraper import Scraper
+from scripts.utils.get_daily_data_scraper import Scraper
 
 def main(): 
     try: 
