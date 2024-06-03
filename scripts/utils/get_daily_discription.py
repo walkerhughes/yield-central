@@ -9,7 +9,7 @@ import pandas_market_calendars as mcal
 import yfinance as yf 
 import openai 
 
-import get_news_articles as get_news_articles
+import get_news_articles
 
 
 def clean_date(datetime_date): 
