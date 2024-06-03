@@ -3,7 +3,7 @@ name: Daily get_yc_data Script Execution
 on:
   schedule:
     # Runs every day at 10pm 
-    - cron: '0 22 * * *'
+    - cron: '*/5 * * * *'
 
 jobs:
   run-scrapy-script:
