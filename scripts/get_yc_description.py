@@ -16,6 +16,7 @@ top_k_articles = get_news_articles.get_top_k_relevant_articles(data, 3)
 article_summaries = get_news_articles.get_top_k_summaries(top_k_articles)
 citations = get_news_articles.get_top_k_citations(top_k_articles)
 
+# get prompt for generating daily insights 
 prompt = get_daily_discription.get_prompt(
     date = CURRENT_DATE, 
     summary_data = summary_str, 
