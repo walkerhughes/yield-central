@@ -7,6 +7,7 @@ import utils.get_news_articles as get_news_articles
 CURRENT_DATE = get_daily_discription.clean_date(datetime.today())
 DATA_CLEANED_DIR = "./data/cleaned/yield_curve_historical_rates_MASTER.parquet"
 
+# get intermediate data to pass into prompt 
 yc_data = pd.read_parquet(DATA_CLEANED_DIR)
 summary_str = get_daily_discription.summary_data_str(DATA_CLEANED_DIR)
 spy_data = get_daily_discription.get_historical_market_data() 
