@@ -165,4 +165,6 @@ def get_prompt(date: str, summary_data: str, historical_yc: str, historical_spy:
 
         Ensure your analysis is intelligent, non-speculative, and free of financial advice. It should be easily understood by an 8th grader but compelling for a professional investor. Use the active voice. 
 
+        Do not include section headers or separators. Output should be in paragraph form.
+
     """
