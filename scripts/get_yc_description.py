@@ -31,7 +31,7 @@ if __name__ == "__main__":
     if get_daily_discription.is_trading_day(): 
 
         temp_insights = get_daily_discription.generate_insight(prompt)
-        insights = f"\n**Digging Deeper**\n\n{temp_insights}\n\n{citations}"
+        insights = f"\n{temp_insights}\n\n{citations}"
 
         temp_tldr = get_daily_discription.generate_tldr(temp_insights)
         tldr = f"\n**TL;DR**\n\n{temp_tldr}\n"
