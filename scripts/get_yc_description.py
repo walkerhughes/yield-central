@@ -1,3 +1,5 @@
+import argparse
+
 import pandas as pd 
 from datetime import datetime
 
@@ -10,6 +12,11 @@ DATA_CLEANED_DIR = "./data/cleaned/yield_curve_historical_rates_MASTER.parquet"
 
 if __name__ == "__main__": 
 
+    parser = argparse.ArgumentParser(description = "Get API key for processing news articles.")
+    parser.add_argument('--api_key', type=str, required=True, help='API key to access the service')
+    args = parser.parse_args()
+    api_key = args.api_key
+
     # generate insights only if its a trading day 
     if get_daily_discription.is_trading_day(): 
 
@@ -19,7 +26,7 @@ if __name__ == "__main__":
         spy_data = get_daily_discription.get_historical_market_data() 
 
         # fetch today's relevant news articles and their citations 
-        data = get_news_articles.get_alphavantage_articles()
+        data = get_news_articles.get_alphavantage_articles(api_key)
         top_k_articles = get_news_articles.get_top_k_relevant_articles(data, 3) 
         article_summaries = get_news_articles.get_top_k_summaries(top_k_articles)
         citations = get_news_articles.get_top_k_citations(top_k_articles)

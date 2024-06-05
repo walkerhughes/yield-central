@@ -2,9 +2,9 @@ from datetime import datetime
 import requests 
 import heapq 
 
-def get_alphavantage_articles() -> dict: 
+def get_alphavantage_articles(api_key) -> dict: 
     # get news articles on the macroeconomy that relate to monetary policy 
-    url = f'https://www.alphavantage.co/query?function=NEWS_SENTIMENT&topics=economy_monetary&apikey=Z1O8XN3WKHVEXJAK'
+    url = f'https://www.alphavantage.co/query?function=NEWS_SENTIMENT&topics=economy_monetary&apikey={api_key}'
     response = requests.get(url)
     response_json = response.json()
     return response_json

@@ -41,10 +41,11 @@ jobs:
       env:
         BIGQUERY_CREDENTIALS: ${{ secrets.BIGQUERY_CREDENTIALS }}
         OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        ALPHAVANTAGE_API_KEY: ${{ secrets.ALPHAVANTAGE_API_KEY }}
       run: |
         echo "${BIGQUERY_CREDENTIALS}" > credentials.json
         export GOOGLE_APPLICATION_CREDENTIALS=credentials.json
-        python3 ./scripts/get_yc_description.py
+        python3 ./scripts/get_yc_description.py --api_key $ALPHAVANTAGE_API_KEY
 
     - name: Commit and push if there are changes
       run: |
