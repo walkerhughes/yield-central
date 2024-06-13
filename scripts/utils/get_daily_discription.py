@@ -113,8 +113,42 @@ def generate_insight(OVERVIEW_PROMPT: str = "") -> str:
     response = openai.ChatCompletion.create(
         model="gpt-4o",
         messages=[
-            {"role": "system", "content": "You are an expert on the US Treasury Yield Curve. You provide concise daily commentary on the Yield Curve's recent movements."},
-            {"role": "user", "content": f"Please answer the following prompt: {OVERVIEW_PROMPT}"}
+            {
+                "role": "system", 
+                "content": """
+
+                    You are an expert on the US Treasury Yield Curve that contributes daily articles to an online publication. 
+
+                    The user will provide you with the following information to aid in your analysis today: 
+                        •	Today's yield curve summary data (if the yield curve is currently inverted based on the 2 Year - 10 Year yields, common credit spreads, etc)
+                        •	End-of-day yield curve values from the last month 
+                        •	End-of-day SPY ETF values form the last month 
+                        •	Relevant news articles from today 
+
+                    Incorporate insights from the most recent Federal Reserve FOMC Statement on June 12, 2024 where appropriate:
+                        "Recent indicators show solid economic growth, strong job gains, and low unemployment. Inflation has eased but remains high, with modest progress toward the 2 percent goal. The Committee aims for maximum employment and 2 percent inflation, noting that risks to these goals have balanced out over the past year. The economic outlook is uncertain, and inflation risks remain a focus.
+                        The Committee decided to maintain the federal funds rate target range at 5.25 to 5.5 percent. Any rate adjustments will depend on incoming data, the evolving outlook, and risk balance. The rate will not be reduced until there is confidence in inflation moving sustainably toward 2 percent. Additionally, the Committee will continue reducing holdings of Treasury and agency securities. The Committee is committed to returning inflation to 2 percent.
+                        The Committee will monitor new information for economic implications and adjust monetary policy if necessary. Assessments will consider labor market conditions, inflation pressures and expectations, and financial and international developments."
+        
+                    Your main goals as a commentator are to:
+                        1.	Inform the reader about current market conditions in the context of user-provided summary data on the economy.
+                        2.	Interpret what these developments may mean for future Federal Reserve monetary policy.
+                    
+                    Develop your analysis with this chain-of-thought:
+                        1.	What does the current shape of the yield curve mean about current capital market structure? Is this consistent with the direction of the stock market?
+                        2.	What do the yield curve values, end-of-day data, and SPY data indicate about the market? How might this influence the Federal Reserve's policy moving forward?
+                        3.	Do the news articles provide any additional useful information? Avoid specific alarming predictions.
+
+                    Your commentary should be optimized for SEO for a macroeconomic publication. Ensure your analysis is intelligent, non-speculative, and free of financial advice. It should be easily understood by an 8th grader but compelling for a professional investor. Use the active voice. 
+                    Do not include section headers or separators. Output should be in paragraph form.
+
+                """
+            },{
+                "role": "user", 
+                "content": f"""
+                    Please answer the following prompt: {OVERVIEW_PROMPT}
+                """
+            }
         ]
     )
     return response['choices'][0]['message']['content'].strip()
@@ -132,15 +166,8 @@ def generate_tldr(insights) -> str:
 
 
 def get_prompt(date: str, summary_data: str, historical_yc: str, historical_spy: str, article_summaries: str) -> str: 
-
     return f""" 
-
-        Today is {date}.
-
-        Write a brief analysis of the most recent US Treasury Yield Curve dynamics. Your goals are to:
-
-            1.	Inform the reader about current market conditions.
-            2.	Interpret what these developments may mean for future Federal Reserve monetary policy.
+        Today is {date}. Write a brief analysis of the most recent US Treasury Yield Curve dynamics.
 
         Use the following data in your analysis:
 
@@ -148,23 +175,4 @@ def get_prompt(date: str, summary_data: str, historical_yc: str, historical_spy:
             •	Last month's end-of-day yield curve values: {historical_yc}
             •	Last month's SPY ETF data: {historical_spy}
             •	Article summaries: {article_summaries}
-
-        Incorporate insights from the two most recent Federal Reserve FOMC Statements:
-
-        March 30, 2024:
-        "Recent indicators suggest solid economic growth, with strong job gains and low unemployment. Although inflation has eased over the past year, it remains high. The Committee aims for maximum employment and 2% inflation over the long term and notes improving balance in achieving these goals, though the economic outlook remains uncertain. To support these goals, the Committee has decided to maintain the federal funds rate at 5.25% to 5.5%. They will assess incoming data and the evolving outlook before making any adjustments, emphasizing that they will not lower the rate until inflation is sustainably moving toward 2%. They will also continue to reduce their holdings of Treasury and agency securities. The Committee is committed to returning inflation to 2% and will monitor incoming information to adjust policy as needed. Their assessments will consider various factors, including labor market conditions, inflation pressures, expectations, and financial and international developments."
-
-        May 2, 2024:
-        "Recent indicators show solid economic growth with strong job gains and low unemployment. Inflation has eased but remains high, with no recent progress toward the 2% target. The Committee aims for maximum employment and 2% inflation long-term, noting improved balance in achieving these goals despite economic uncertainty. It remains focused on inflation risks. To support its objectives, the Committee keeps the federal funds rate at 5.25-5.5% and will adjust based on incoming data and risk balance. No rate reduction is expected until inflation moves sustainably toward 2%. The Committee will reduce its Treasury securities holdings more slowly, from $60 billion to $25 billion monthly, while maintaining a $35 billion cap on agency securities. The Committee is committed to returning inflation to 2% and will adjust monetary policy as needed, considering labor market, inflation, and global financial developments."
-
-        Develop your analysis with this chain-of-thought:
-
-            1.	What are the Federal Reserve's goals regarding inflation and interest rates?
-            2.	How do the yield curve summary, end-of-day values, and SPY data indicate about the market? How might this influence the Federal Reserve's response?
-            3.	Do the article summaries provide any additional useful information? Avoid specific alarming predictions made.
-
-        Ensure your analysis is intelligent, non-speculative, and free of financial advice. It should be easily understood by an 8th grader but compelling for a professional investor. Use the active voice. 
-
-        Do not include section headers or separators. Output should be in paragraph form.
-
     """
