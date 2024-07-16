@@ -5,7 +5,7 @@ Welcome to YieldCentral, a daily-updated hub for U.S. Treasury Yield Curve data.
 ## Features
 **Daily Updates**: EOD data scraped directly from treasury.gov each day and pushed to Google BigQuery via GitHub Actions Workflow.
 
-**Insights**: Generates insights on the most up-to-date yield curve dynamics with GPT-4o. The model assumes the personality of a macroeconomic expert keen on educating the reader about monetary policy, accomplished via efficient system-level prompting. Current data is fer to the model via the user prompt, and includes: 
+**Insights**: Generates insights on the most up-to-date yield curve dynamics with GPT-4o. The model assumes the personality of a macroeconomic expert keen on educating the reader about monetary policy, accomplished via efficient system-level prompting. Daily data is fed to the model via the user prompt, and includes: 
 1. Daily and historical yield curve values
 2. Yield curve summary statistics, including if the yield curve is inverted, inversion duration, and magnitude of inversion 
 3. Daily and historical SPY ETF values to indicate dynamics of equity markets from the Yahoo Finance API 
