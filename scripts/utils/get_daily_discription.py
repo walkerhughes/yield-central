@@ -167,12 +167,13 @@ def generate_tldr(insights) -> str:
 
 def get_prompt(date: str, summary_data: str, historical_yc: str, historical_spy: str, article_summaries: str) -> str: 
     return f""" 
-        Today is {date}. Write a brief analysis of the most recent US Treasury Yield Curve dynamics.
+        Today is {date}. Write a brief macroeconomic analysis of the most recent US Treasury Yield Curve dynamics.
 
         Use the following data in your analysis:
-
             •	Today's yield curve summary: {summary_data}
             •	Last month's end-of-day yield curve values: {historical_yc}
             •	Last month's SPY ETF data: {historical_spy}
             •	Article summaries: {article_summaries}
+
+        Your analysis should be focused, structured, and comprehensive.
     """
