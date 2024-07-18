@@ -111,7 +111,7 @@ def push_to_big_query(data, table_id = 'daily_description'):
 # Create a function to generate insights
 def generate_insight(OVERVIEW_PROMPT: str = "") -> str:
     response = openai.ChatCompletion.create(
-        model="gpt-4o",
+        model="gpt-4o-mini",
         messages=[
             {
                 "role": "system", 
@@ -156,7 +156,7 @@ def generate_insight(OVERVIEW_PROMPT: str = "") -> str:
 
 def generate_tldr(insights) -> str:
     response = openai.ChatCompletion.create(
-        model="gpt-4o",
+        model="gpt-4o-mini",
         messages=[
             {"role": "system", "content": "You are an expert at summarizing long text while maintaining the most vital information."},
             {"role": "user", "content": f"Summarize the following text, returning only your summary: {insights}"}
