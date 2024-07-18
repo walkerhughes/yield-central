@@ -1,4 +1,4 @@
-## [Yield Curve Central](https://www.yieldcurvecentral.com/): Daily Yield Curve Insights Brought to you by GPT-4o
+## [YieldCurveCentral.com](https://www.yieldcurvecentral.com/): Daily Yield Curve Insights Brought to you by GPT-4o
 
 This project brings digestible, daily macroeconomic analyses of the most current yield curve interest rate dynamics to your fingertips. Yield Curve Central leverages a data ingestion pipeline automated with GitHub Actions to process data from various sources each day, including data scraped from Treasury.gov and obtained through the Yahoo Finance and AlphaVantage APIs. This data is passed to GPT-4o, which generates bespoke analyses displayed on a web page deployed on Vercel and built with TypeScript and Next.js.
 
