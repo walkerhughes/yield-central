@@ -89,6 +89,29 @@ def summary_data_str(data_cleaned_dir):
     return summary_str
 
 
+def get_n_previous_descriptions(n: int = 5): 
+    # init client 
+    client = bigquery.Client() 
+    # Define your dataset and table
+    dataset_id = 'yieldcurve'
+    table_id = 'historical'
+    table_ref = client.dataset(dataset_id).table(table_id) 
+
+    query = f"""
+        SELECT * FROM `yieldcurve-422317.yieldcurve.daily_description` ORDER BY Date DESC LIMIT {n};
+    """
+    results = client.query(query)  
+    descriptions = pd.DataFrame([dict(_) for _ in results.result()])
+    return descriptions
+
+
+def format_prev_descriptions(n: int = 5) -> str: 
+    # inputs
+    #   n (int): number of previous descriptions to retrieve from bigquery 
+    desc = get_n_previous_descriptions(n)
+    return "\n\n".join([f"Date: {date}\nDescription: {description}" for date, description in zip(desc.Date, desc.Description)])
+
+
 def push_to_big_query(data, table_id = 'daily_description'):
     # init client 
     client = bigquery.Client()
@@ -147,6 +170,37 @@ def generate_insight(OVERVIEW_PROMPT: str = "") -> str:
                 "role": "user", 
                 "content": f"""
                     Please answer the following prompt: {OVERVIEW_PROMPT}
+                """
+            }
+        ]
+    )
+    return response['choices'][0]['message']['content'].strip()
+
+
+def generate_reflection(descriptions) -> str:
+    response = openai.ChatCompletion.create(
+        model="gpt-4o-mini",
+        messages=[
+            {
+                "role": "system", 
+                "content": """
+
+                    You are an expert on the US Treasury Yield Curve that contributes daily articles to an online publication. The user will provide you with your last 5 descriptions about the yield curve and current state of monetary policy. 
+
+                    Market's are closed today, so instead of generating a unique insight, you will summarize your analyses from the past 5 days and list in bullet points the biggest unanswered questions for the week ahead regarding markets and monetary policy.
+                    
+                    Your main goals as a commentator are to:
+                        1.	Inform the reader about current market conditions in the context of user-provided summary data on the economy.
+                        2.	Interpret what these developments may mean for future Federal Reserve monetary policy.
+                    
+                    Your commentary should be optimized for SEO for a macroeconomic publication. Ensure your analysis is intelligent, non-speculative, and free of financial advice. It should be easily understood by an 8th grader but compelling for a professional investor. Use the active voice. 
+                    Do not include section headers or separators. Output should be in paragraph form.
+
+                """
+            },{
+                "role": "user", 
+                "content": f"""
+                    Provide a summary of these analyses on the US Treasury Yield Curve from the past several days: {descriptions}
                 """
             }
         ]
