@@ -3,7 +3,7 @@ import argparse
 import pandas as pd 
 from datetime import datetime
 
-import utils.get_daily_discription as get_daily_discription 
+import utils.get_daily_discription as get_daily_discription
 import utils.get_news_articles as get_news_articles 
 
 CURRENT_DATE = get_daily_discription.clean_date(datetime.today())
@@ -47,8 +47,10 @@ if __name__ == "__main__":
         tldr = f"\n**TL;DR**\n\n{temp_tldr}\n"
         
     else: 
-        insights = f"\nMarkets are closed today. Please check back for updated insights soon."
-        tldr = "\nValues displayed are from last trading day."
+        desc = get_daily_discription.format_prev_descriptions() 
+        insights = f"\nThe following is a summary of the past week's Yield Curve movements."
+        insights += "\n\n" + get_daily_discription.generate_reflection(desc)
+        tldr = "\nMarkets are closed today. Values displayed are from last trading day."
         citations = ""
 
     get_daily_discription.push_to_big_query(
