@@ -179,7 +179,7 @@ def generate_insight(OVERVIEW_PROMPT: str = "") -> str:
 
 def generate_reflection(descriptions) -> str:
     response = openai.ChatCompletion.create(
-        model="gpt-4o-mini",
+        model="gpt-4o",
         messages=[
             {
                 "role": "system", 
@@ -210,7 +210,7 @@ def generate_reflection(descriptions) -> str:
 
 def generate_tldr(insights) -> str:
     response = openai.ChatCompletion.create(
-        model="gpt-4o-mini",
+        model="gpt-4o",
         messages=[
             {"role": "system", "content": "You are an expert at summarizing long text while maintaining the most vital information."},
             {"role": "user", "content": f"Summarize the following text, returning only your summary: {insights}"}
