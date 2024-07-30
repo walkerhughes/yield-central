@@ -8,6 +8,9 @@ import os
 from google.cloud import bigquery 
 
 class Scraper: 
+    """
+    Class to scrape web page andretrieve daily yield curve values. 
+    """
     def __init__(self): 
         self.today = datetime.today().date()
         self.today_str = self.today.strftime('%Y-%m-%d')
